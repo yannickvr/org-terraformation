@@ -61,27 +61,26 @@ This assumes you're familiar with importing now.
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.0 |
 
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_accounts"></a> [accounts](#module\_accounts) | ./modules/aws-account | n/a |
-| <a name="module_ous"></a> [ous](#module\_ous) | ./modules/aws-organizational-unit | n/a |
-
 ## Resources
 
 | Name | Type |
 |------|------|
+| [aws_organizations_account.account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account) | resource |
 | [aws_organizations_organization.org](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organization) | resource |
+| [aws_organizations_organizational_unit.fifth_level_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
+| [aws_organizations_organizational_unit.first_level_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
+| [aws_organizations_organizational_unit.fourth_level_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
+| [aws_organizations_organizational_unit.second_level_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
+| [aws_organizations_organizational_unit.third_level_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_accounts"></a> [accounts](#input\_accounts) | n/a | <pre>map(object({<br>    email  = string,<br>    parent = optional(string, "root"),<br>    tags   = optional(map(string))<br>  }))</pre> | `{}` | no |
+| <a name="input_accounts"></a> [accounts](#input\_accounts) | n/a | <pre>map(object({<br>    email                      = string<br>    tags                       = optional(map(string), null)<br>    iam_user_access_to_billing = optional(string, null)<br>    parent                     = optional(string, "root")<br>  }))</pre> | n/a | yes |
 | <a name="input_aws_service_access_principals"></a> [aws\_service\_access\_principals](#input\_aws\_service\_access\_principals) | n/a | `list(any)` | <pre>[<br>  "cloudtrail.amazonaws.com",<br>  "inspector2.amazonaws.com",<br>  "securityhub.amazonaws.com",<br>  "sso.amazonaws.com"<br>]</pre> | no |
 | <a name="input_feature_set"></a> [feature\_set](#input\_feature\_set) | n/a | `string` | `"ALL"` | no |
-| <a name="input_ous"></a> [ous](#input\_ous) | n/a | <pre>map(object({<br>    parent = optional(string),<br>    tags   = optional(map(string))<br>  }))</pre> | `{}` | no |
+| <a name="input_ous"></a> [ous](#input\_ous) | n/a | <pre>map(object({<br>    parent = optional(string, "")<br>    tags   = optional(map(string))<br>  }))</pre> | `{}` | no |
 
 ## Outputs
 

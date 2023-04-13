@@ -1,6 +1,6 @@
 variable "ous" {
   type = map(object({
-    parent = optional(string),
+    parent = optional(string, "")
     tags   = optional(map(string))
   }))
   default = {}
@@ -8,11 +8,11 @@ variable "ous" {
 
 variable "accounts" {
   type = map(object({
-    email  = string,
-    parent = optional(string, "root"),
-    tags   = optional(map(string))
+    email                      = string
+    tags                       = optional(map(string), null)
+    iam_user_access_to_billing = optional(string, null)
+    parent                     = optional(string, "root")
   }))
-  default = {}
 }
 
 variable "aws_service_access_principals" {

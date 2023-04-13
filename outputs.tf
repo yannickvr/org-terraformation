@@ -1,7 +1,9 @@
 output "accounts" {
-  value = module.accounts.accounts
+  value = {
+    for k, v in aws_organizations_account.account : k => v.id
+  }
 }
 
 output "ous" {
-  value = module.ous.ids
+  value = local.ous
 }
