@@ -2,7 +2,7 @@
 
 `JBOT - Just a Bunch Of Terraform. But to manage your AWS organization`
 
-This is a (hobby) attempt to create the features that the AWSome org-formation has, but natively in Terraform. 
+This is a (hobby) attempt to create the features that the AWSome [org-formation](https://github.com/org-formation/org-formation-cli) has, but natively in Terraform. 
 
 Wishlist: 
 
