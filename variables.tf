@@ -28,4 +28,18 @@ variable "aws_service_access_principals" {
 variable "feature_set" {
   type    = string
   default = "ALL"
+  description = "Enable all features for the organization"
+}
+
+variable "enabled_policy_types" {
+  type    = list(string)
+  default = []
+  description = "Which policy types to enable for the organization. See https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnablePolicyType.html"
+}
+
+variable "delegated_administrators" {
+  type = map(object({
+    account = string
+  }))
+  description = "Used to delegate administration of a service for the whole organization. ie. securityhub"
 }

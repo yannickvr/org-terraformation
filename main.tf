@@ -1,6 +1,7 @@
 resource "aws_organizations_organization" "org" {
   aws_service_access_principals = var.aws_service_access_principals
   feature_set                   = var.feature_set
+  enabled_policy_types          = var.enabled_policy_types
 }
 
 resource "aws_organizations_account" "account" {
@@ -10,6 +11,12 @@ resource "aws_organizations_account" "account" {
   tags                       = each.value.tags
   iam_user_access_to_billing = each.value.iam_user_access_to_billing
   parent_id                  = each.value.parent
+}
+
+resource "aws_organizations_delegated_administrator" "this" {
+  for_each          = var.delegated_administrators
+  account_id        = aws_organizations_account.account[each.value.account].id
+  service_principal = "${each.key}.amazonaws.com"
 }
 
 resource "aws_organizations_organizational_unit" "first_level_ou" {
