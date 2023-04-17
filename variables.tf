@@ -4,6 +4,7 @@ variable "ous" {
     tags   = optional(map(string))
   }))
   default = {}
+  description = "A map of the organizational units. The key is used for the OU name"
 }
 
 variable "accounts" {
@@ -13,6 +14,7 @@ variable "accounts" {
     iam_user_access_to_billing = optional(string, null)
     parent                     = optional(string, "root")
   }))
+  description = "A map of accounts. The key is used for the account name"
 }
 
 variable "aws_service_access_principals" {
@@ -23,6 +25,7 @@ variable "aws_service_access_principals" {
     "securityhub.amazonaws.com",
     "sso.amazonaws.com",
   ]
+  description = "List of trusted service access principals"
 }
 
 variable "feature_set" {
