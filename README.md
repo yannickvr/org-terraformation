@@ -4,11 +4,19 @@
 
 This is a (hobby) attempt to create the features that the AWSome [org-formation](https://github.com/org-formation/org-formation-cli) has, but natively in Terraform. 
 
+Features:
+
+- Create AWS Organization
+- Create Organizational units
+- Create Organization member accounts
+    - Add member accounts to organizational units
+- Configure delegated administrators
+- Configure enabled policy types
+
 Wishlist: 
 
 - An analogue for `org-formation init` which imports the organization
 - Service Control policies
-- Bunch of other stuff
 
 # Usage
 
