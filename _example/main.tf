@@ -11,6 +11,13 @@ module "org-terraformation" {
       tags = {
         managedby = "org-terraformation"
       }
+      policies = ["example"]
+    }
+  }
+  policies = {
+    "example" = {
+      content     = file("${path.module}/example.json")
+      description = "example scp"
     }
   }
   accounts = {
@@ -25,8 +32,9 @@ module "org-terraformation" {
       parent = "dev"
     }
     "shared" = {
-      email  = "shared@example.com"
-      parent = "shared"
+      email    = "shared@example.com"
+      parent   = "shared"
+      policies = ["example"]
     }
   }
   enabled_policy_types = ["SERVICE_CONTROL_POLICY"]

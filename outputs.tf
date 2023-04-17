@@ -6,6 +6,6 @@ output "accounts" {
 }
 
 output "ous" {
-  value = local.ous
+  value       = local.ous
   description = "Organizational units and OU Ids"
 }

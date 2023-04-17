@@ -8,15 +8,20 @@ Features:
 
 - Create AWS Organization
 - Create Organizational units
+    - Add parent Organizational Units (Max 5 levels deep!)
+    - Attach Organization Policies
 - Create Organization member accounts
     - Add member accounts to organizational units
+    - Attach Organization Policies
 - Configure delegated administrators
 - Configure enabled policy types
+- Create Organization Policies
+    - Defaults to Service Control Policies
 
 Wishlist: 
 
 - An analogue for `org-formation init` which imports the organization
-- Service Control policies
+- More docs and examples
 
 # Usage
 
@@ -69,7 +74,6 @@ This assumes you're familiar with importing now.
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.63.0 |
 
-
 ## Resources
 
 | Name | Type |
@@ -82,17 +86,21 @@ This assumes you're familiar with importing now.
 | [aws_organizations_organizational_unit.fourth_level_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
 | [aws_organizations_organizational_unit.second_level_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
 | [aws_organizations_organizational_unit.third_level_ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_organizational_unit) | resource |
+| [aws_organizations_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_policy) | resource |
+| [aws_organizations_policy_attachment.account](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_policy_attachment) | resource |
+| [aws_organizations_policy_attachment.ou](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_policy_attachment) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_accounts"></a> [accounts](#input\_accounts) | A map of accounts. The key is used for the account name | <pre>map(object({<br>    email                      = string<br>    tags                       = optional(map(string), null)<br>    iam_user_access_to_billing = optional(string, null)<br>    parent                     = optional(string, "root")<br>  }))</pre> | n/a | yes |
+| <a name="input_accounts"></a> [accounts](#input\_accounts) | A map of accounts. The key is used for the account name | <pre>map(object({<br>    email                      = string<br>    tags                       = optional(map(string), null)<br>    iam_user_access_to_billing = optional(string, null)<br>    parent                     = optional(string, "root")<br>    policies                   = optional(list(string), null)<br>  }))</pre> | n/a | yes |
 | <a name="input_aws_service_access_principals"></a> [aws\_service\_access\_principals](#input\_aws\_service\_access\_principals) | List of trusted service access principals | `list(any)` | <pre>[<br>  "cloudtrail.amazonaws.com",<br>  "inspector2.amazonaws.com",<br>  "securityhub.amazonaws.com",<br>  "sso.amazonaws.com"<br>]</pre> | no |
 | <a name="input_delegated_administrators"></a> [delegated\_administrators](#input\_delegated\_administrators) | Used to delegate administration of a service for the whole organization. ie. securityhub | <pre>map(object({<br>    account = string<br>  }))</pre> | n/a | yes |
 | <a name="input_enabled_policy_types"></a> [enabled\_policy\_types](#input\_enabled\_policy\_types) | Which policy types to enable for the organization. See https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnablePolicyType.html | `list(string)` | `[]` | no |
 | <a name="input_feature_set"></a> [feature\_set](#input\_feature\_set) | Enable all features for the organization | `string` | `"ALL"` | no |
-| <a name="input_ous"></a> [ous](#input\_ous) | A map of the organizational units. The key is used for the OU name | <pre>map(object({<br>    parent = optional(string, "")<br>    tags   = optional(map(string))<br>  }))</pre> | `{}` | no |
+| <a name="input_ous"></a> [ous](#input\_ous) | A map of the organizational units. The key is used for the OU name | <pre>map(object({<br>    parent   = optional(string, "")<br>    tags     = optional(map(string))<br>    policies = optional(list(string), null)<br>  }))</pre> | `{}` | no |
+| <a name="input_policies"></a> [policies](#input\_policies) | Organization policies | <pre>map(object({<br>    content     = string<br>    description = optional(string, null)<br>    type        = optional(string, null)<br>  }))</pre> | n/a | yes |
 
 ## Outputs
 

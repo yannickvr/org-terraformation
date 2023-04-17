@@ -13,6 +13,26 @@ resource "aws_organizations_account" "account" {
   parent_id                  = each.value.parent
 }
 
+resource "aws_organizations_policy" "this" {
+  for_each    = var.policies
+  name        = each.key
+  content     = each.value.content
+  description = each.value.description
+  type        = each.value.type
+}
+
+resource "aws_organizations_policy_attachment" "account" {
+  for_each  = { for attachment in local.account_policy_attachments : "${attachment.policy}.${attachment.target}" => attachment }
+  policy_id = aws_organizations_policy.this[each.value.policy].id
+  target_id = aws_organizations_account.account[each.value.target].id
+}
+
+resource "aws_organizations_policy_attachment" "ou" {
+  for_each  = { for attachment in local.ou_policy_attachments : "${attachment.policy}.${attachment.target}" => attachment }
+  policy_id = aws_organizations_policy.this[each.value.policy].id
+  target_id = local.ous[each.value.target]
+}
+
 resource "aws_organizations_delegated_administrator" "this" {
   for_each          = var.delegated_administrators
   account_id        = aws_organizations_account.account[each.value.account].id

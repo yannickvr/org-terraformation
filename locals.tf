@@ -51,5 +51,28 @@ locals {
     for k, v in aws_organizations_organizational_unit.fifth_level_ou : k => v.id
   }
 
+  account_policy_attachments = flatten(
+    [
+      for key, value in var.accounts : [
+        for attachment in value.policies : {
+          target = key
+          policy = attachment
+        }
+      ]
+      if value.policies != null
+    ]
+  )
+
+  ou_policy_attachments = flatten(
+    [
+      for key, value in var.ous : [
+        for attachment in value.policies : {
+          target = key
+          policy = attachment
+        }
+      ]
+      if value.policies != null
+    ]
+  )
 
 }
