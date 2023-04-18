@@ -22,6 +22,7 @@ Wishlist:
 
 - An analogue for `org-formation init` which imports the organization
 - [AWS Account contact information](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact)
+- [AWS Service Quota, ie. max accounts in the org](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/servicequotas_service_quota)
 - More docs and examples
 
 # Usage
