@@ -21,6 +21,7 @@ Features:
 Wishlist: 
 
 - An analogue for `org-formation init` which imports the organization
+- [AWS Account contact information](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact)
 - More docs and examples
 
 # Usage
