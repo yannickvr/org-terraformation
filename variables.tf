@@ -17,6 +17,7 @@ variable "accounts" {
     policies                   = optional(list(string), null)
   }))
   description = "A map of accounts. The key is used for the account name"
+  default     = {}
 }
 
 variable "policies" {
@@ -26,16 +27,12 @@ variable "policies" {
     type        = optional(string, null)
   }))
   description = "Organization policies"
+  default     = {}
 }
 
 variable "aws_service_access_principals" {
-  type = list(any)
-  default = [
-    "cloudtrail.amazonaws.com",
-    "inspector2.amazonaws.com",
-    "securityhub.amazonaws.com",
-    "sso.amazonaws.com",
-  ]
+  type        = list(any)
+  default     = []
   description = "List of trusted service access principals"
 }
 
@@ -56,4 +53,5 @@ variable "delegated_administrators" {
     account = string
   }))
   description = "Used to delegate administration of a service for the whole organization. ie. securityhub"
+  default     = {}
 }
