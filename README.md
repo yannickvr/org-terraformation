@@ -24,6 +24,7 @@ Wishlist:
 - [AWS Account contact information](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact)
 - [AWS Service Quota, ie. max accounts in the org](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/servicequotas_service_quota)
 - More docs and examples
+- Add option to automatically create (Github) OIDC providers, like: https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-github-oidc-provider
 
 # Usage
 
